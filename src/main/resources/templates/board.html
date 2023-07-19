@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 목록</title>
+</head>
+<body>
+<h1>게시판 목록</h1>
+<table>
+    <th>게시글 번호</th>
+    <th> 제목 </th>
+    <th> 작성자 </th>
+    <th> 작성일 </th>
+    <tr th:each="board : ${boards}">
+        <td th:text="${board.id}"></td>
+        <td><a th:text="${board.title}" th:href="@{/board/{id}(id=${board.id})}" ></a></td>
+        <td th:text="${board.createdBy}"></td>
+        <td th:text="${board.createdAt}"></td>
+    </tr>
+</table>
+
+<!--페이징 버튼 표시-->
+<div>
+    <div th:if="${boards.totalPages>1}">
+        <ul class="pagination">
+            <li th:if="${boards.number}>0">
+                <a th:href="@{/board(page=${boards.number -1}, size =${boards.size})}" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:each="i : ${#numbers.sequence(0, boards.totalPages -1)}" th:class="${boards.number == i} ? 'active'">
+                <a th:href="@{/board(page = ${i}, size = ${boards.size})}" th:text="${i+1}"></a>
+            </li>
+            <li th:if="${boards.number < boards.totalPages -1}">
+                <a th:href="@{/board(page=${boards.number +1}, size = ${boards.size})}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

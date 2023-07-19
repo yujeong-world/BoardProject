@@ -7,8 +7,12 @@ plugins {
 group = 'com.jpaStudy'
 version = '0.0.1-SNAPSHOT'
 
+
 java {
     sourceCompatibility = '1.8'
+    //소스 인코딩 설정 추가
+    compileJava.options.encoding = 'UTF-8'
+
 }
 
 configurations {
@@ -26,6 +30,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

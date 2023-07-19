@@ -1,0 +1,20 @@
+<!-- board_detail.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board Detail</title>
+</head>
+<body>
+<h1>Board Detail</h1>
+<div>
+  <h2 th:text="${board.title}"></h2>
+  <p th:text="${board.content}"></p>
+  <p>Created By: <span th:text="${board.createdBy}"></span></p>
+  <p>Created At: <span th:text="${board.createdAt}"></span></p>
+  <p>Modified By: <span th:text="${board.modifiedBy}"></span></p>
+  <p>Modified At: <span th:text="${board.modifiedAt}"></span></p>
+</div>
+</body>
+</html>

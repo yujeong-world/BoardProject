@@ -1,4 +1,4 @@
-package com.jpastudy.bookmanager;
+package com.jpastudy.board;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
