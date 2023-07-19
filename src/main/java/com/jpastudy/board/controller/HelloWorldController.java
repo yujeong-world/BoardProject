@@ -1,4 +1,4 @@
-package com.jpastudy.bookmanager.controller;
+package com.jpastudy.board.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

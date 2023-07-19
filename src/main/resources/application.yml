@@ -1,4 +1,20 @@
 spring:
+  datasource:
+    url: jdbc:h2:mem:f524abaa-b40b-4de3-bf3b-a9d5152d1152
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
   h2:
     console:
       enabled: true
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+    #하이버네이트 초기화를 통해 생성된 스키마에다 데이터를 채우기 위해서 data.sql 실행되기 위해
