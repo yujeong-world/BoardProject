@@ -30,3 +30,9 @@ insert into board(user_id, title, content, created_by, created_at, modified_by, 
 values ('yujeong', '오늘 날씨', '오늘 날씨가 매우 더워요', 'yujeong', '2023-07-18 14:05:10', 'yujeong', '2023-07-18 14:08:10');
 insert into board(user_id, title, content, created_by, created_at, modified_by, modified_at)
 values ('jeongho', '홍수 피해 지역', '안녕하세요. 홍수 피해지역을 알려드립니다', 'jeongho', '2023-07-16 14:05:10', 'jeongho', '2023-07-16 14:08:10');
+
+--댓글 데이터
+insert into comment(board_id, user_id, content,created_by, created_at, modified_by, modified_at)
+values ('1', 'jeongho', '아니요! 그런 생각을 하다니 당신은 싸이코 패스입니다.', 'jeongho', '2023-07-20 13:11', 'jeongho', '2023-07-20 13:11');
+insert into comment(board_id, user_id, content,created_by, created_at, modified_by, modified_at)
+values ('1', 'jeongho', '그럴 수는 없습니다.', 'jeongho', '2023-07-20 14:11', 'jeongho', '2023-07-20 14:11');
