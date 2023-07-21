@@ -3,9 +3,14 @@ package com.jpastudy.board.dto;
 import com.jpastudy.board.domain.Board;
 import com.jpastudy.board.domain.Comment;
 import com.jpastudy.board.domain.UserAccount;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
-
+@Getter
+@Setter
+@NoArgsConstructor
 public class CommentDto {
     private Long id;
     private Long boardId;

@@ -5,10 +5,12 @@ import com.jpastudy.board.domain.UserAccount;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class BoardDto {
     private Long id;
@@ -43,7 +45,7 @@ public class BoardDto {
                 entity.getContent(),
                 entity.getCreatedAt(),
                 entity.getCreatedBy(),
-                entity.getCreatedAt(),
+                entity.getModifiedAt(),
                 entity.getModifiedBy()
         );
     }

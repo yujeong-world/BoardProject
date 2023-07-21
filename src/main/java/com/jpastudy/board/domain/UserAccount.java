@@ -24,6 +24,8 @@ public class UserAccount extends AuditingFields{
     @Column(nullable = false)
     private String email;
 
+
+
     protected UserAccount() {}
 
     @Builder

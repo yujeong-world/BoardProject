@@ -6,6 +6,16 @@
 </head>
 <body>
 <h1>게시판 목록</h1>
+<div>
+    <a href="/login">로그인하러가기</a>
+    <a href="/userJoinForm">회원 가입 하러가기</a>
+</div>
+<!--검색 폼-->
+<form th:action="@{/board}" method="get">
+    <input type="text" name="searchKeyword" placeholder="검색어를 입력하세요" />
+    <button type="submit">검색</button>
+</form>
+
 <table>
     <th>게시글 번호</th>
     <th> 제목 </th>
@@ -39,5 +49,11 @@
         </ul>
     </div>
 </div>
+
+<!-- 로그인한 사용자에게만 글 쓰기 버튼 보여주기 -->
+<div th:if="${isLoggedIn} and ${hasUserRole}">
+    <a href="/board/write">새로운 글 쓰기</a>
+</div>
+
 </body>
 </html>

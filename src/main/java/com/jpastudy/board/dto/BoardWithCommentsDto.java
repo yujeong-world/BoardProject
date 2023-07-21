@@ -2,12 +2,15 @@ package com.jpastudy.board.dto;
 
 import com.jpastudy.board.domain.Board;
 import com.jpastudy.board.domain.UserAccount;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+@Getter
+@NoArgsConstructor
 public class BoardWithCommentsDto {
     private Long id;
     private UserAccountDto userAccountDto;
