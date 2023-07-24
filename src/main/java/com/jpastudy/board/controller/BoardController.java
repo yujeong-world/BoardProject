@@ -72,6 +72,19 @@ public class BoardController {
             @PathVariable Long boardId,
             ModelMap model
     ) throws ChangeSetPersister.NotFoundException {
+        //현재 사용자 정보 확인
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isLoggedIn = authentication.isAuthenticated();
+        String userName= authentication.getName();
+
+        //현재 사용자가 인증되어 있으면 ROLE_USER 권한이 있는지 확인
+        boolean hasUserRole = authentication.getAuthorities().stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_USER"));
+
+        model.addAttribute("hasUserRole", hasUserRole);
+        model.addAttribute("isLoggedIn", isLoggedIn);
+        model.addAttribute("userName", userName);
+
         BoardWithCommentsDto boardWithCommentsDto = boardService.getBoardById(boardId);
         model.addAttribute("board", boardWithCommentsDto);
         return "boardDetail";
@@ -89,8 +102,30 @@ public class BoardController {
 
 
         commentService.saveBoardComment(commentDto, userId, boardId);
-        return "boardDetail";
+        return "redirect:/board/"+boardId;
     }
+
+    //댓글 삭제
+    @PostMapping("/{boardId}/comment/{commentId}")
+    public String boardCommentDelete(
+            @PathVariable Long boardId,
+            @PathVariable Long commentId
+    ){
+
+        commentService.CommentDelete(commentId);
+        return "redirect:/board/"+boardId;
+    }
+
+
+    //게시판 글 삭제
+    @PostMapping("/{boardId}/deleteBoard")
+    public String boardDelete(
+            @PathVariable Long boardId
+    ){
+        boardService.boardDelete(boardId);
+        return "redirect:/board";
+    }
+
 
     //글쓰기
     @GetMapping("/write")

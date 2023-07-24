@@ -7,6 +7,7 @@ import com.jpastudy.board.dto.BoardDto;
 import com.jpastudy.board.dto.BoardWithCommentsDto;
 import com.jpastudy.board.dto.UserAccountDto;
 import com.jpastudy.board.repository.BoardsRepository;
+import com.jpastudy.board.repository.CommentRepository;
 import com.jpastudy.board.repository.UserAccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -69,6 +70,12 @@ public class BoardService {
 
         return BoardDto.from(board);
     }
+
+    @Transactional
+    public void boardDelete(Long boardId){
+        boardsRepository.deleteById(boardId);
+    }
+
 
 
 }

@@ -29,6 +29,11 @@ public class UserAccountController {
         return "redirect:/board";
     }
 
+    @GetMapping("/mypage")
+    public String mypage(){
+        return "/mypage";
+    }
+
 
 
 /*

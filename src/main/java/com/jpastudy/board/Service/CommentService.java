@@ -48,13 +48,21 @@ public class CommentService {
         Board board = boardsRepository.findById(boardId)
                 .orElseThrow(()->new EntityNotFoundException("boardId not found"));
         commentDto.setContent(commentDto.getContent());
-        //commentDto.setBoardId(board.getId());
-        //commentDto.setUserAccountDto(UserAccountDto.from(userAccount));
-        //Comment comment = commentRepository.save(commentDto.toEntity(board,userAccount));
+        commentDto.setBoardId(board.getId());
+        commentDto.setUserAccountDto(UserAccountDto.from(userAccount));
+        commentDto.setCreatedBy(userAccount.getUserId());
+        Comment comment = commentRepository.save(commentDto.toEntity(board,userAccount));
 
-        Comment comment = commentRepository.save(CommentDto.of(boardId, UserAccountDto.from(userAccount), commentDto.getContent()));
+        //Comment comment = commentRepository.save(CommentDto.of(boardId, UserAccountDto.from(userAccount), commentDto.getContent()));
         return CommentDto.from(comment);
 
+    }
+
+
+    //댓글 삭제
+    @Transactional
+    public void CommentDelete(Long commentId){
+        commentRepository.deleteById(commentId);
     }
 
 }

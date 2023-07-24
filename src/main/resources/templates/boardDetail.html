@@ -16,20 +16,40 @@
   <p>Modified By: <span th:text="${board.modifiedBy}"></span></p>
   <p>Modified At: <span th:text="${board.modifiedAt}"></span></p>
   <h3>댓글창</h3>
-  <form action="/board/${board.id}" th:action method="post">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <p>댓글</p>
-    <input type="text" id="content" name="content" required>
-    <button type="submit">업로드</button>
-  </form>
+  <div th:if="${isLoggedIn} and ${hasUserRole}">
+    <form th:action="@{/board/{boardId}(boardId=${board.id})}" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+      <p>댓글</p>
+      <input type="text" id="content" name="content" required>
+      <button type="submit">업로드</button>
+    </form>
+  </div>
+
   <div>
     <ul>
       <li th:each="comment : ${board.commentDtos}">
         <span th:text="${comment.createdBy}"></span>
         <span th:text="${comment.content}"></span>
+        <div  th:if="${isLoggedIn and hasUserRole and comment.createdBy == userName}">
+          <form th:action="@{/board/{boardId}/comment/{commentId}(boardId=${board.id}, commentId = ${comment.id})}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <!-- 삭제 버튼과 기타 폼 요소들 -->
+            <button type="submit">댓글 삭제</button>
+          </form>
+        </div>
       </li>
     </ul>
   </div>
+
+  <div  th:if="${isLoggedIn and hasUserRole and board.createdBy == userName}">
+    <form th:action="@{/board/{boardId}/deleteBoard(boardId=${board.id})}" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+      <!-- 삭제 버튼과 기타 폼 요소들 -->
+      <button type="submit">삭제</button>
+    </form>
+  </div>
+
+
 </div>
 </body>
 </html>
