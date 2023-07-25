@@ -2,14 +2,10 @@ package com.jpastudy.board.controller;
 
 import com.jpastudy.board.Service.BoardService;
 import com.jpastudy.board.Service.CommentService;
-import com.jpastudy.board.domain.Board;
-import com.jpastudy.board.domain.UserAccount;
 import com.jpastudy.board.dto.BoardDto;
 import com.jpastudy.board.dto.BoardWithCommentsDto;
 import com.jpastudy.board.dto.CommentDto;
-import com.jpastudy.board.dto.UserAccountDto;
 import lombok.RequiredArgsConstructor;
-import net.bytebuddy.TypeCache;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,13 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/board")
@@ -85,7 +76,7 @@ public class BoardController {
         model.addAttribute("isLoggedIn", isLoggedIn);
         model.addAttribute("userName", userName);
 
-        BoardWithCommentsDto boardWithCommentsDto = boardService.getBoardById(boardId);
+        BoardWithCommentsDto boardWithCommentsDto = boardService.getBoarWithCommentdById(boardId);
         model.addAttribute("board", boardWithCommentsDto);
         return "boardDetail";
     }
@@ -124,6 +115,28 @@ public class BoardController {
     ){
         boardService.boardDelete(boardId);
         return "redirect:/board";
+    }
+
+    //게시판 글 수정
+    @PostMapping("/{boardId}/modifyBoard")
+    public String boardModify(
+            @PathVariable Long boardId,
+            @RequestParam String title,
+            @RequestParam String content
+    ) throws ChangeSetPersister.NotFoundException {
+        BoardDto boardDto = boardService.boardModify(boardId,title,content);
+        return "redirect:/board/"+ boardId;
+    }
+
+    //게시판 수정 페이지로 이동
+    @GetMapping("/{boardId}/modifyBoard/write")
+    public String boardModifyWrite(
+            @PathVariable Long boardId,
+            ModelMap model
+    ) throws ChangeSetPersister.NotFoundException {
+        BoardDto boardDto = boardService.getBoardModifyById(boardId);
+        model.addAttribute("board", boardDto);
+        return "writeModify";
     }
 
 

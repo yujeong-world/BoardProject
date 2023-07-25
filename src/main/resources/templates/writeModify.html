@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>글쓰기</title>
+</head>
+<body>
+<h1>글작성</h1>
+<form  th:action="@{/board/{boardId}/modifyBoard(boardId=${board.id})}" th:method="post">
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+  <p>제목</p>
+  <textarea type="text" id="username" name="title" th:text="${board.title}" required></textarea>
+  <br>
+  <p>내용</p>
+  <textarea type="text" id="content" name="content" th:text="${board.content}" required></textarea>
+
+  <button type="submit">업로드</button>
+</form>
+</body>
+</html>
